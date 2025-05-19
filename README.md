@@ -112,7 +112,7 @@ AI_ultrasound_segmentation/segment_example_images.ipynb
   author={Wu, Luohong and Cavalcanti, Nicola A. and Seibold, Matthias and Loggia, Giuseppe and Reissner, Lisa and Hein, Jonas and Beeler, Silvan and Viehöfer, Arnd and Wirth, Stephan and Calvet, Lilian and Fürnstahl, Philipp},
   journal={arXiv preprint arXiv:2502.03783},
   year={2025}
-  doi={https://arxiv.org/abs/2502.03783v2}
+  doi={https://arxiv.org/abs/2502.03783}
 }
 ```
 
