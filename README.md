@@ -104,8 +104,6 @@ AI_ultrasound_segmentation/segment_example_images.ipynb
 
 
 # Reference
-If you use this dataset or code, please cite our paper:
-
 ```bibtex
 @article{wu2025ultrabones100k,
   title={UltraBones100k: A reliable automated labeling method and large-scale dataset for ultrasound-based bone surface extraction},
