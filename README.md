@@ -8,7 +8,7 @@ In case questions, you can create a Github issue within this repository.
 
 # News
 
-- 27.05.2025: We have uploaded the CT bone models for each specimen.
+- 27.05.2025: We have uploaded the CT bone models for each specimen. You can find them under the root folder of each specimen, detailed in the following section `Dataset File Structure`
 - 21.05.2025: Our manuscript has been accepted by Computers in Biology and Medicine, which will be online soon.
 
 # Requirements 
