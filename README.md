@@ -52,6 +52,7 @@ The dataset is organized as follows:
 ```
 XXX:\AI_ULTRASOUND_DATASET
 ├───cadaver01_F231091
+│   ├───CT_bone_model.stl
 │   ├───record01
 │   │   ├───UltrasoundImages
 │   │   │   └───timestamp.png
