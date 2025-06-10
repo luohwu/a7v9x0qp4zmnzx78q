@@ -17,7 +17,8 @@ def construct_pcd_from_df(df_chunk):
         if 255 not in np.unique(label):
             continue
 
-        # There are two types of tracking data in `tracking.csv`: original (i.e., x) and optimized (i.e., x_optimized). Both are already temporally synchronized.
+        # There are two types of tracking data in `tracking.csv`: original (i.e., x) and optimized (i.e., x_optimized). Both are already temporally synchronized, so they
+        # can be used directly
 
         # using original tracking data
         T_tracking = vectorToMatrix([row['x'], row['y'], row['z']],
@@ -26,18 +27,26 @@ def construct_pcd_from_df(df_chunk):
         # using optimized tracking data
         # T_tracking = vectorToMatrix([row['x_optimized'], row['y_optimized'], row['z_optimized']],
         #                             [row['euler_x_optimized'], row['euler_y_optimized'], row['euler_z_optimized']])
+
+        # the coordinate system of the ultrasound image is defined at the top-left corner
         T_scale = np.eye(4)
         T_scale[0, 0] = row['scale_X']
         T_scale[1, 1] = row['scale_Y']
+
+        # keep only bone pixels
         rows_index, cols_index = np.where(abs(label) > 0)
         if len(rows_index) < 2:
             return None
 
         xyz_pixels = np.stack([cols_index + 0.5, rows_index + 0.5, np.zeros_like(rows_index), np.ones_like(rows_index)],
-                              axis=1).T
+                              axis=1).T # homogenous coordinates with [x,y,z,1]. z is always 0 for the image plane
 
-        # important_points=np.concatenate([origin,four_corners]).T
         calibrationT = vectorToMatrix(row['calibration_t'], row['calibration_euler'])
+
+
+        # T_scale @ xyz_pixels: convert pixels to points (unit:mm) in the ImagePlane coor
+        # calibrationT @ T_scale @ xyz_pixels: pixels(ImagePlane) -> Points (ImagePlane) -> Points (Marker space)
+        # T_tracking @ calibrationT @ T_scale @ xyz_pixels: pixels(ImagePlane) -> Points (ImagePlane) -> Points (Marker space) -> Points (CT space)
         T_img_2_world = T_tracking @ calibrationT @ T_scale
         xyz_world = (T_img_2_world @ xyz_pixels)
 
@@ -67,23 +76,25 @@ def main_foot_ankle():
     ]
 
 
-    # calibration results
-    calibration_t = [26.44694442, -0.52572229, 128.00100047]
-    calibration_euler = [92.48865621, -0.46874914, 179.2277322] # euler angles in dgrees
-    scale_X = 0.05392
-    scale_Y = 0.05392
+    # calibration results. Note that the special details are the same for all sweeps.
+    calibration_t = [26.44694442, -0.52572229, 128.00100047] # unit: mm
+    calibration_euler = [92.48865621, -0.46874914, 179.2277322] # euler angles in degrees
+    scale_X = 0.05392 # mm/pixel
+    scale_Y = 0.05392 # mm/pixel
 
     dataset_root_folder = "../data/AI_Ultrasound_dataset"
     cadavers_involved = [1,3,4,5,6,9,10,11,12,13,14]
     for cadaver_id in cadavers_involved:
         cadaver_name = cadaver_names[cadaver_id]
+
+        # read CT model data
         CT_model_mesh=o3d.io.read_triangle_mesh(os.path.join(dataset_root_folder,cadaver_name,"CT_bone_model.stl"))
         CT_model_pcd=CT_model_mesh.sample_points_uniformly(1000000)
-        for record_id in range(1,15):
-            start = time.time()
 
+        for record_id in range(1,15):
             dataFolder=os.path.join(dataset_root_folder,cadaver_name,f"record{record_id:02d}")
             assert os.path.isdir(dataFolder),"dataset folder does not exist"
+
             label_folder = os.path.join(dataFolder, 'Labels')
             timestamps_target = [int(file.split('_')[0]) for file in os.listdir(label_folder) if
                                  file.endswith("_label.png")]
@@ -91,6 +102,8 @@ def main_foot_ankle():
 
 
             tracking_df = tracking_df[tracking_df['timestamp'].isin(timestamps_target)]
+
+            # update the details for each frame
             tracking_df['label_path'] = tracking_df['timestamp'].apply(
                 lambda x: os.path.join(label_folder, f"{x}_label.png"))
             tracking_df['calibration_t'] = [calibration_t] * len(tracking_df)
@@ -115,7 +128,6 @@ def main_foot_ankle():
             reconstruction_pcd = o3d.geometry.PointCloud()
             reconstruction_pcd.points = o3d.utility.Vector3dVector(xyz)
 
-            print(f"Total time: {time.time() - start} seconds, {dataFolder}")
 
             dis=np.asarray(reconstruction_pcd.compute_point_cloud_distance(CT_model_pcd))
             print(f"CD distance from US-reconstruction to CT-pcd: {dis.mean()}")
