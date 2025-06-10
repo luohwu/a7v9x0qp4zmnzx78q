@@ -169,7 +169,7 @@ def parse_args():
     parser.add_argument('--num_epochs', type=int, default=110, help='Number of epochs')
     parser.add_argument('--num_workers', type=int, default=8, help='Number of workers')
     parser.add_argument('--encoder', type=str, default="resnet34 FPN", help='Encoder type for the model')
-    parser.add_argument('--dataset_root_folder', type=str, default="./data/AI_Ultrasound_dataset", help='Root directory for the dataset')
+    parser.add_argument('--dataset_root_folder', type=str, default="../data/AI_Ultrasound_dataset", help='Root directory for the dataset')
     return parser.parse_args()
 
 if __name__ == '__main__':

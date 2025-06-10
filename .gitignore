@@ -2,7 +2,8 @@ prepare_dataset_for_public.py
 __pycache__
 lightning_logs
 models_big
-
+data/AI_Ultrasound_dataset
+data/**/
 .idea
 .pycache
 

@@ -5,7 +5,7 @@ import random
 from AI_ultrasound_segmentation.DataAugmentation import TrivialTransform
 from AI_ultrasound_segmentation.UltrasoundDataset import constructDatasetFromDataFolders,cadaver_ids
 import time
-from Utils.generalCV import *
+from Tools.generalCV import *
 import scipy
 def set_seed(seed_testue=42):
     """Set seed for reproducibility."""
@@ -194,7 +194,7 @@ def main():
     print(f"Using device: {device}")
 
     data_folders_test = []
-    dataset_root_folder = "./data/AI_Ultrasound_dataset"
+    dataset_root_folder = "../data/AI_Ultrasound_dataset"
     cadavers_involved_test = [2, 7,8]
     # Adjust the range as needed
     for idx in cadavers_involved_test:

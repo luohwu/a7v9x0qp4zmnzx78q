@@ -4,7 +4,7 @@ import pandas as pd
 from torch.utils.data import DataLoader, Dataset
 
 from PIL import Image
-from Utils.generalCV import *
+from Tools.generalCV import *
 from AI_ultrasound_segmentation.DataAugmentation import TrivialTransform
 cadaver_ids=[
     "cadaver00-F230837",

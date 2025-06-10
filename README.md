@@ -3,11 +3,12 @@
 This is the repository of the UltraBones100k, which is still under development. It contains:
 1. **Dataset Access**: Instructions for downloading the dataset.
 2. **Bone Segmentation in Ultrasound Images**: Code and pretrained models for accurate bone segmentation in ultrasound imaging.
+3. **3D Reconstruction from Ultrasound Sweeps** Example code for reconstructing 3D data from ultrasound sweeps and measure the distance
 
 In case questions, you can create a Github issue within this repository.
 
 # News
-
+- 10.06.2025: The code for 3D reconstruction from ultrasound has been added. The code provides visualization and distance evaluation against the ground-truth CT model
 - 27.05.2025: We have uploaded the CT bone models for each specimen. You can find them under the root folder of each specimen, detailed in the following section `Dataset File Structure`
 - 21.05.2025: Our manuscript has been accepted by Computers in Biology and Medicine, which will be online soon.
 
@@ -78,12 +79,13 @@ XXX:\AI_ULTRASOUND_DATASET
 ⋮
 ⋮
 ```
+# Tracking data
+There are two types of tracking data in `tracking.csv`: original (i.e., x) and optimized (i.e., x_optimized). Both are already temporally synchronized.
 
-
-# Train the Bone Segmentation model 
+ Train the Bone Segmentation model 
 The training script is located at:
 ``` AI_ultrasound_segmentation/train_lightning.py ```. Train the model using one NVIDIA V100 for 100 epochs, which typically takes around 10 hours. The training process leverages a ResNet-34 FPN architecture with a combination of DICE and BCE losses, and a learning rate of 1e-05.
-By default, we assume the dataset folder located at ```./AI_ultrasound_segmentation/data/AI_Ultrasound_dataset/```
+By default, we assume the dataset folder located at ```../data/AI_Ultrasound_dataset/```
 
 To train the model, just run `python AI_ultrasound_segmentation/train_lightning.py`
 
@@ -111,14 +113,23 @@ AI_ultrasound_segmentation/segment_example_images.ipynb
 
 
 
+# 3D Reconstruction from ultrasound
+
+To reconstruct point clouds from ultrasound sweeps and evaluate the results against 3D CT bone model, run the following code (you might need to change the dataset path):
+```
+3D reconstruction/3D_reconstruction_from_US.py
+```
+
 # Reference
 ```bibtex
 @article{wu2025ultrabones100k,
   title={UltraBones100k: A reliable automated labeling method and large-scale dataset for ultrasound-based bone surface extraction},
-  author={Wu, Luohong and Cavalcanti, Nicola A. and Seibold, Matthias and Loggia, Giuseppe and Reissner, Lisa and Hein, Jonas and Beeler, Silvan and Viehöfer, Arnd and Wirth, Stephan and Calvet, Lilian and Fürnstahl, Philipp},
-  journal={arXiv preprint arXiv:2502.03783},
-  year={2025}
-  doi={https://arxiv.org/abs/2502.03783}
+  author={Wu, Luohong and Cavalcanti, Nicola A and Seibold, Matthias and Loggia, Giuseppe and Reissner, Lisa and Hein, Jonas and Beeler, Silvan and Vieh{\"o}fer, Arnd and Wirth, Stephan and Calvet, Lilian and others},
+  journal={Computers in Biology and Medicine},
+  volume={194},
+  pages={110435},
+  year={2025},
+  publisher={Elsevier}
 }
 ```
 
