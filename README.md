@@ -80,7 +80,10 @@ XXX:\AI_ULTRASOUND_DATASET
 ⋮
 ```
 # Tracking data
-There are two types of tracking data in `tracking.csv`: original (i.e., x) and optimized (i.e., x_optimized). Both are already temporally synchronized.
+There are two types of tracking data in `tracking.csv`: original (i.e., x) and optimized (i.e., x_optimized). Both are already temporally synchronized. An example code for 3D reconstruction is availble at 
+```
+3D reconstruction/3D_reconstruction_from_US.py
+```
 
 # Train the Bone Segmentation model 
 The training script is located at:
