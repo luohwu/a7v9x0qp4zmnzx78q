@@ -82,7 +82,7 @@ XXX:\AI_ULTRASOUND_DATASET
 # Tracking data
 There are two types of tracking data in `tracking.csv`: original (i.e., x) and optimized (i.e., x_optimized). Both are already temporally synchronized.
 
- Train the Bone Segmentation model 
+# Train the Bone Segmentation model 
 The training script is located at:
 ``` AI_ultrasound_segmentation/train_lightning.py ```. Train the model using one NVIDIA V100 for 100 epochs, which typically takes around 10 hours. The training process leverages a ResNet-34 FPN architecture with a combination of DICE and BCE losses, and a learning rate of 1e-05.
 By default, we assume the dataset folder located at ```../data/AI_Ultrasound_dataset/```
