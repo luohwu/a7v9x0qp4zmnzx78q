@@ -8,6 +8,8 @@ This is the repository of the UltraBones100k, which is still under development. 
 In case questions, you can create a Github issue within this repository.
 
 # News
+
+- 12.06.2025: We have uploaded full bone labels. These labels around for tasks like full bone surface segmentation, 3D bone shape completion etc.
 - 10.06.2025: The code for 3D reconstruction from ultrasound has been added. The code provides visualization and distance evaluation against the ground-truth CT model
 - 27.05.2025: We have uploaded the CT bone models for each specimen. You can find them under the root folder of each specimen, detailed in the following section `Dataset File Structure`
 - 21.05.2025: Our manuscript has been accepted by Computers in Biology and Medicine, which will be online soon.
@@ -59,17 +61,23 @@ XXX:\AI_ULTRASOUND_DATASET
 │   │   │   └───timestamp.png
 │   │   ├───Labels
 │   │   │   └───timestamp_label.png
+│   │   ├───Labels_full
+│   │   │   └───timestamp_label.png
 │   │   └───tracking.csv
 │   ├───record02
 │   │   ├───UltrasoundImages
 │   │   │   └───timestamp.png
 │   │   ├───Labels
 │   │   │   └───timestamp_label.png
+│   │   ├───Labels_full
+│   │   │   └───timestamp_label.png
 │   │   └───tracking.csv
 │   ├───record03
 │   │   ├───UltrasoundImages
 │   │   │   └───timestamp.png
 │   │   ├───Labels
+│   │   │   └───timestamp_label.png
+│   │   ├───Labels_full
 │   │   │   └───timestamp_label.png
 │   │   └───tracking.csv
 │   ⋮
