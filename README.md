@@ -9,10 +9,10 @@ In case questions, you can create a Github issue within this repository.
 
 # News
 
-- 12.06.2025: We have uploaded full bone labels. These labels around for tasks like full bone surface segmentation, 3D bone shape completion etc.
+- 12.06.2025: We have uploaded complete bone labels (including bone shadow), enabling tasks such as full bone surface segmentation, 3D bone shape completion, and more
 - 10.06.2025: The code for 3D reconstruction from ultrasound has been added. The code provides visualization and distance evaluation against the ground-truth CT model
 - 27.05.2025: We have uploaded the CT bone models for each specimen. You can find them under the root folder of each specimen, detailed in the following section `Dataset File Structure`
-- 21.05.2025: Our manuscript has been accepted by Computers in Biology and Medicine, which will be online soon.
+- 21.05.2025: Our manuscript has been accepted by Computers in Biology and Medicine. See the reference section.
 
 # Requirements 
 Run the following command to install all the packages listed in the `requirements.txt` file: 
@@ -133,14 +133,17 @@ To reconstruct point clouds from ultrasound sweeps and evaluate the results agai
 
 # Reference
 ```bibtex
-@article{wu2025ultrabones100k,
-  title={UltraBones100k: A reliable automated labeling method and large-scale dataset for ultrasound-based bone surface extraction},
-  author={Wu, Luohong and Cavalcanti, Nicola A and Seibold, Matthias and Loggia, Giuseppe and Reissner, Lisa and Hein, Jonas and Beeler, Silvan and Vieh{\"o}fer, Arnd and Wirth, Stephan and Calvet, Lilian and others},
-  journal={Computers in Biology and Medicine},
-  volume={194},
-  pages={110435},
-  year={2025},
-  publisher={Elsevier}
+@article{WU2025110435,
+title = {UltraBones100k: A reliable automated labeling method and large-scale dataset for ultrasound-based bone surface extraction},
+journal = {Computers in Biology and Medicine},
+volume = {194},
+pages = {110435},
+year = {2025},
+issn = {0010-4825},
+doi = {https://doi.org/10.1016/j.compbiomed.2025.110435},
+url = {https://www.sciencedirect.com/science/article/pii/S0010482525007863},
+author = {Luohong Wu and Nicola A. Cavalcanti and Matthias Seibold and Giuseppe Loggia and Lisa Reissner and Jonas Hein and Silvan Beeler and Arnd Viehöfer and Stephan Wirth and Lilian Calvet and Philipp Fürnstahl},
+keywords = {Ultrasound bone segmentation, Bone surface segmentation, Bone surface reconstruction, Ultrasound image analysis, Computer-assisted orthopedic surgery},
 }
 ```
 
