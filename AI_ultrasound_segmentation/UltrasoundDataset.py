@@ -6,22 +6,22 @@ from torch.utils.data import DataLoader, Dataset
 from PIL import Image
 from Tools.generalCV import *
 from AI_ultrasound_segmentation.DataAugmentation import TrivialTransform
-cadaver_ids=[
-    "cadaver00-F230837",
-    "cadaver01_F231091",
-    "cadaver02_F231218",
-    "cadaver03_S231783",
-    "cadaver04_F231091",
-    "cadaver05_S232132L",
-    "cadaver06_S231987",
-    "cadaver07_S232132R",
-    "cadaver08_S231989L",
-    "cadaver09_S231989R",
-    "cadaver10_S232098L",
-    "cadaver11_S232110",
-    "cadaver12_S240174",
-    "cadaver13_S232110L",
-    "cadaver14_S240280"
+specimen_ids=[
+    "specimen00",
+    "specimen01",
+    "specimen02",
+    "specimen03",
+    "specimen04",
+    "specimen05",
+    "specimen06",
+    "specimen07",
+    "specimen08",
+    "specimen09",
+    "specimen10",
+    "specimen11",
+    "specimen12",
+    "specimen13",
+    "specimen14"
 ]
 
 
@@ -104,7 +104,7 @@ def tensor_2_opencv(img_tensor,mean=-1,std=-1):
 
 def main():
 
-    dataFolders = [f"Z:/AI_Ultrasound_dataset/cadaver01_F231091/Linear18/record{i:02d}" for i in [1,15]]
+    dataFolders = [f"Z:/AI_Ultrasound_dataset/specimen01_F231091/Linear18/record{i:02d}" for i in [1,15]]
     transform = TrivialTransform(num_ops=2,image_size=(256, 256),train=True)
     dataset = constructDatasetFromDataFolders(dataFolders, transform)
     loader = DataLoader(dataset, batch_size=5,shuffle=True)  # Load one item at a time for visualization

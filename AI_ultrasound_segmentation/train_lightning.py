@@ -11,7 +11,7 @@ import monai
 import segmentation_models_pytorch as smp
 
 from AI_ultrasound_segmentation.DataAugmentation import TrivialTransform
-from AI_ultrasound_segmentation.UltrasoundDataset import constructDatasetFromDataFolders, cadaver_ids
+from AI_ultrasound_segmentation.UltrasoundDataset import constructDatasetFromDataFolders, specimen_ids
 from AI_ultrasound_segmentation.LossFunctions import Binary_Segmentation_Loss
 
 import numpy as np
@@ -132,12 +132,12 @@ class UltrasoundDataModule(pl.LightningDataModule):
 
     def setup(self, stage=None):
 
-        cadavers_involved_train = [idx for idx in self.train_all_index if idx!= self.val_idx]
+        specimens_involved_train = [idx for idx in self.train_all_index if idx!= self.val_idx]
         data_folders_train = []
-        for idx in cadavers_involved_train:
-            cadaver_id = cadaver_ids[idx]
-            data_folders_train += [f"{self.dataset_root_folder}/{cadaver_id}/record{i:02d}" for i in range(1, 15)]
-        data_folders_val = [f"{self.dataset_root_folder}/{cadaver_ids[self.val_idx]}/record{i:02d}" for i in range(1, 15)]
+        for idx in specimens_involved_train:
+            specimen_id = specimen_ids[idx]
+            data_folders_train += [f"{self.dataset_root_folder}/{specimen_id}/record{i:02d}" for i in range(1, 15)]
+        data_folders_val = [f"{self.dataset_root_folder}/{specimen_ids[self.val_idx]}/record{i:02d}" for i in range(1, 15)]
 
 
 
@@ -190,7 +190,7 @@ if __name__ == '__main__':
 
     for val_idx in specimen_index_list:
         train_index = [idx for idx in specimen_index_list if idx != val_idx]
-        print(f"current validation cadaver_idx:{cadaver_ids[val_idx]}")
+        print(f"current validation specimen_idx:{specimen_ids[val_idx]}")
         model = UltrasoundSegmentationModel(lr=lr, DICE_weight=DICE_weight, BCE_weight=BCE_weight, skeleton_weight=skeleton_weight,val_index=val_idx)
         data_module = UltrasoundDataModule(batch_size=batch_size, dataset_root_folder=dataset_root_folder, num_workers=num_workers,validation_index=val_idx,train_index=train_index)
 

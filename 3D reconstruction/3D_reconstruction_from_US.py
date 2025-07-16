@@ -57,22 +57,22 @@ def construct_pcd_from_df(df_chunk):
     return None
 
 def main_foot_ankle():
-    cadaver_names = [
-        "cadaver00-F230837",
-        "cadaver01_F231091",
-        "cadaver02_F231218",
-        "cadaver03_S231783",
-        "cadaver04_F231091",
-        "cadaver05_S232132L",
-        "cadaver06_S231987",
-        "cadaver07_S232132R",
-        "cadaver08_S231989L",
-        "cadaver09_S231989R",
-        "cadaver10_S232098L",
-        "cadaver11_S232110",
-        "cadaver12_S240174",
-        "cadaver13_S232110L",
-        "cadaver14_S240280"
+    specimen_names = [
+        "specimen00",
+        "specimen01",
+        "specimen02",
+        "specimen03",
+        "specimen04",
+        "specimen05",
+        "specimen06",
+        "specimen07",
+        "specimen08",
+        "specimen09",
+        "specimen10",
+        "specimen11",
+        "specimen12",
+        "specimen13",
+        "specimen14"
     ]
 
 
@@ -83,16 +83,16 @@ def main_foot_ankle():
     scale_Y = 0.05392 # mm/pixel
 
     dataset_root_folder = "../data/AI_Ultrasound_dataset"
-    cadavers_involved = [1,3,4,5,6,9,10,11,12,13,14]
-    for cadaver_id in cadavers_involved:
-        cadaver_name = cadaver_names[cadaver_id]
+    specimens_involved = [1,3,4,5,6,9,10,11,12,13,14]
+    for specimen_id in specimens_involved:
+        specimen_name = specimen_names[specimen_id]
 
         # read CT model data
-        CT_model_mesh=o3d.io.read_triangle_mesh(os.path.join(dataset_root_folder,cadaver_name,"CT_bone_model.stl"))
+        CT_model_mesh=o3d.io.read_triangle_mesh(os.path.join(dataset_root_folder,specimen_name,"CT_bone_model.stl"))
         CT_model_pcd=CT_model_mesh.sample_points_uniformly(1000000)
 
         for record_id in range(1,15):
-            dataFolder=os.path.join(dataset_root_folder,cadaver_name,f"record{record_id:02d}")
+            dataFolder=os.path.join(dataset_root_folder,specimen_name,f"record{record_id:02d}")
             assert os.path.isdir(dataFolder),"dataset folder does not exist"
 
             label_folder = os.path.join(dataFolder, 'Labels')

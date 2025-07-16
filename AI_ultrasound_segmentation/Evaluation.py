@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader
 import matplotlib.pyplot as plt
 import random
 from AI_ultrasound_segmentation.DataAugmentation import TrivialTransform
-from AI_ultrasound_segmentation.UltrasoundDataset import constructDatasetFromDataFolders,cadaver_ids
+from AI_ultrasound_segmentation.UltrasoundDataset import constructDatasetFromDataFolders,specimen_ids
 import time
 from Tools.generalCV import *
 import scipy
@@ -195,11 +195,11 @@ def main():
 
     data_folders_test = []
     dataset_root_folder = "../data/AI_Ultrasound_dataset"
-    cadavers_involved_test = [2, 7,8]
+    specimens_involved_test = [2, 7,8]
     # Adjust the range as needed
-    for idx in cadavers_involved_test:
-        cadaver_id = cadaver_ids[idx]  # Update according to how cadaver_ids are formatted
-        data_folders_test += [f"{dataset_root_folder}/{cadaver_id}/record{i:02d}" for i in range(1, 15)]
+    for idx in specimens_involved_test:
+        specimen_id = specimen_ids[idx]  # Update according to how specimen_ids are formatted
+        data_folders_test += [f"{dataset_root_folder}/{specimen_id}/record{i:02d}" for i in range(1, 15)]
         #
 
     transform_test = TrivialTransform(num_ops=1, image_size=[256, 256], train=False)

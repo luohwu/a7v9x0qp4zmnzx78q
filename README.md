@@ -47,14 +47,14 @@ We are currently collecting data for additional anatomies, including the spine a
 The dataset is organized as follows:
 
 - **Root Folder**: `AI_Ultrasound_dataset` is the main directory.
-- **Specimen Folders**: Each specimen folder (e.g., `cadaver01_F231091`, `cadaver02_F231218`) contains data for one specimen.
+- **Specimen Folders**: Each specimen folder (e.g., `specimen01`, `specimen02`) contains data for one specimen.
 - **Record Folders**: Each specimen folder has subfolders for each record (e.g., `record01`, `record02`).
 - **Labels**: Contains the label files for that record.
 - **UltrasoundImages**: Contains the ultrasound image files for that record.
 
 ```
 XXX:\AI_ULTRASOUND_DATASET
-├───cadaver01_F231091
+├───specimen01
 │   ├───CT_bone_model.stl
 │   ├───record01
 │   │   ├───UltrasoundImages
@@ -82,8 +82,8 @@ XXX:\AI_ULTRASOUND_DATASET
 │   │   └───tracking.csv
 │   ⋮
 │   ⋮
-├───cadaver02_F231218
-├───cadaver03_S231783
+├───specimen02_F231218
+├───specimen03_S231783
 ⋮
 ⋮
 ```
